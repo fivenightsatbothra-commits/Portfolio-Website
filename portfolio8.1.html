@@ -1246,44 +1246,6 @@
 
 
         
-// 💒 1. Disable right-click
-document.addEventListener('contextmenu', e => e.preventDefault());
-
-// 💒 2. Disable inspect / save / print shortcuts
-document.addEventListener('keydown', e => {
-  if (
-    (e.ctrlKey && ['s','u','p','S','U','P'].includes(e.key)) || // Ctrl+S, Ctrl+U, Ctrl+P
-    e.key === 'F12' ||                                          // DevTools
-    (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key))  // Ctrl+Shift+I/J/C
-  ) {
-    e.preventDefault();
-    sparkle(e.clientX, e.clientY);
-  }
-});
-
-// 💒 3. Block drag saving of images
-document.addEventListener('dragstart', e => e.preventDefault());
-document.querySelectorAll('img').forEach(img => img.setAttribute('draggable', 'false'));
-
-// 💒 4. Disable text selection & copying
-document.addEventListener('copy', e => e.preventDefault());
-document.addEventListener('cut', e => e.preventDefault());
-document.addEventListener('selectstart', e => e.preventDefault());
-document.body.style.userSelect = 'none';
-document.body.style.webkitUserSelect = 'none';
-
-// 💒 5. Detect if DevTools is open
-setInterval(() => {
-  if (
-    window.outerWidth - window.innerWidth > 160 ||
-    window.outerHeight - window.innerHeight > 160
-  ) {
-    document.body.innerHTML = `
-      <div style="text-align:center;margin-top:20%;font-size:2rem;color:#d6336c;">
-        💖 Please close developer tools to continue 💖
-      </div>`;
-  }
-}, 1000);
 
 
     </script>
