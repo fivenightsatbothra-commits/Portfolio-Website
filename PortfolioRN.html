@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en"><head><style>body { font-family: monospace; background:#141414; color:#fff; }</style></head><body>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Developer | Portfolio</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;700;800&amp;display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Deep Space Palette */
+            --bg-body: #030014;
+            --bg-card: rgba(18, 18, 30, 0.7);
+            
+            /* Gradients */
+            --gradient-1: #7038ff;
+            --gradient-2: #cb30ff;
+            --gradient-3: #00d4ff;
+            
+            --text-main: #ffffff;
+            
+            --border-light: rgba(255, 255, 255, 0.15);
+            --border-glow: rgba(255, 255, 255, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- Force All Text to White --- */
+        .text-muted {
+            color: #ffffff !important; 
+            opacity: 0.8;
+        }
+        
+        h1, h2, h3, h4, h5, p, span, a, i {
+            color: #ffffff;
+        }
+
+        /* --- Texture --- */
+        .noise-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* --- Background Animation --- */
+        .ambient-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; overflow: hidden; background: #030014;
+        }
+
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4;
+            animation: moveOrb 20s infinite alternate;
+        }
+        
+        .orb-1 { width: 600px; height: 600px; background: var(--gradient-1); top: -10%; left: -10%; animation-duration: 25s; }
+        .orb-2 { width: 500px; height: 500px; background: var(--gradient-2); bottom: -10%; right: -5%; animation-duration: 20s; animation-delay: -5s; }
+        .orb-3 { width: 300px; height: 300px; background: var(--gradient-3); top: 40%; left: 50%; transform: translate(-50%, -50%); animation-duration: 18s; opacity: 0.2; }
+
+        @keyframes moveOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3, h4, h5, .navbar-brand { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.03em; }
+        .text-gradient {
+            background: linear-gradient(to right, var(--gradient-3), var(--gradient-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 900px;
+            background: rgba(15, 15, 25, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-light);
+            border-radius: 100px; padding: 12px 30px;
+            z-index: 1000; transition: all 0.3s ease;
+        }
+        .navbar-brand { font-size: 1.25rem; font-weight: 800; color: white !important; }
+        .nav-link { color: rgba(255,255,255,0.7) !important; font-size: 0.9rem; font-weight: 600; padding: 8px 16px !important; border-radius: 30px; transition: 0.3s; }
+        .nav-link:hover { color: white !important; background: rgba(255,255,255,0.1); }
+        
+        .btn-hire {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white; font-weight: 700; padding: 10px 24px;
+            border-radius: 50px; border: none; transition: transform 0.2s;
+        }
+        .btn-hire:hover { transform: scale(1.05); color: white; box-shadow: 0 0 30px rgba(203, 48, 255, 0.6); }
+
+        /* --- Hero --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 100px; }
+        .hero-badge {
+            border: 1px solid var(--border-light); background: rgba(255, 255, 255, 0.05);
+            padding: 8px 20px; border-radius: 50px; font-size: 0.85rem; color: white;
+            display: inline-flex; align-items: center; gap: 10px; margin-bottom: 30px; font-weight: 600;
+        }
+        .status-dot { width: 8px; height: 8px; background-color: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite; }
+        .display-1 { font-size: clamp(3.5rem, 8vw, 6rem); font-weight: 800; line-height: 1.05; margin-bottom: 30px; }
+
+        /* --- Marquee --- */
+        .marquee-wrapper {
+            position: relative; padding: 80px 0;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.02), transparent);
+            border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);
+        }
+        .tech-icon { font-size: 2rem; color: rgba(255,255,255,0.5); margin: 0 40px; transition: 0.3s; }
+        .tech-icon:hover { color: white; transform: scale(1.2); text-shadow: 0 0 20px rgba(255,255,255,0.5); opacity: 1; }
+
+        /* --- Cards --- */
+        .project-card {
+            background: var(--bg-card); border: 1px solid var(--border-light);
+            border-radius: 20px; overflow: hidden; transition: all 0.5s; position: relative; height: 100%; display: block; text-decoration: none;
+        }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--border-glow); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6); }
+        .card-img-box { height: 260px; background: #0f1016; overflow: hidden; }
+        .card-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; opacity: 0.8; }
+        .project-card:hover .card-img-box img { transform: scale(1.08); opacity: 1; }
+        .card-content { padding: 30px; position: relative; }
+
+        /* --- Buttons & Links --- */
+        .btn-arrow {
+            width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s;
+        }
+        
+        .project-card:hover .btn-arrow {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white; transform: rotate(-45deg);
+        }
+
+        .social-link {
+            width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--border-light);
+            display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s; font-size: 1.2rem; text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2));
+            color: white; transform: translateY(-5px); border-color: transparent;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            border-top: 1px solid var(--border-light); padding: 80px 0 40px; margin-top: 100px;
+            background: linear-gradient(to bottom, var(--bg-body), #000);
+        }
+
+        /* --- Stats Grid Fixes --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-light);
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            border-color: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.05);
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk';
+            color: #ffffff; /* Explicit White */
+            margin-bottom: 5px;
+            text-shadow: 0 0 30px rgba(255,255,255,0.2); 
+            line-height: 1.2;
+        }
+
+        /* --- CMS STYLES --- */
+        #cms-overlay {
+            position: fixed; top: 0; right: -450px; width: 400px; height: 100vh;
+            background: #0f1016; border-left: 1px solid var(--border-light);
+            z-index: 10000; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-y: auto; padding: 20px; box-shadow: -10px 0 50px rgba(0,0,0,0.8);
+            display: flex; flex-direction: column;
+        }
+        #cms-overlay.active { right: 0; }
+        
+        .cms-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-bottom: 20px; border-bottom: 1px solid var(--border-light);
+            margin-bottom: 20px;
+        }
+        .cms-section { margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; }
+        .cms-section h5 { color: var(--gradient-3); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+        
+        .cms-input-group { margin-bottom: 15px; }
+        .cms-input-group label { display: block; font-size: 0.8rem; color: #aaa; margin-bottom: 5px; }
+        .cms-input {
+            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border-light);
+            color: white; padding: 10px; border-radius: 8px; font-size: 0.9rem;
+        }
+        .cms-input:focus { outline: none; border-color: var(--gradient-1); }
+        
+        .project-list-item {
+            background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px;
+            margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .btn-cms-action {
+            padding: 5px 10px; border-radius: 4px; font-size: 0.75rem; border: none; cursor: pointer; transition: 0.2s;
+        }
+        .btn-delete { background: rgba(220, 53, 69, 0.2); color: #ff6b6b; }
+        .btn-delete:hover { background: rgba(220, 53, 69, 0.4); }
+        .btn-edit { background: rgba(13, 110, 253, 0.2); color: #6ea8fe; margin-right: 5px; }
+        .btn-edit:hover { background: rgba(13, 110, 253, 0.4); }
+        
+        .cms-actions {
+            position: sticky; bottom: 0; background: #0f1016; padding-top: 15px; padding-bottom: 15px; border-top: 1px solid var(--border-light);
+            display: grid; grid-template-columns: 1fr 1.5fr; gap: 10px; margin-top: auto;
+        }
+
+        /* Edit Form inside CMS */
+        #project-editor-form, #social-editor-form {
+            background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;
+            border: 1px solid var(--gradient-1);
+        }
+
+        /* --- Utilities --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .d-none { display: none !important; }
+
+        /* Archive Grid Styles */
+        .archive-header { padding: 120px 0 60px; text-align: center; }
+        .back-btn { 
+            position: fixed; top: 120px; left: 5%; z-index: 100;
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            border: 1px solid var(--border-light); color: white;
+            padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: 0.3s;
+        }
+        .back-btn:hover { background: white; color: black; }
+    </style>
+
+
+
+    <!-- Texture & Background -->
+    <div class="noise-overlay"></div>
+    <div class="ambient-glow">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Floating Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" onclick="showHome()">SHREY<span style="color:var(--gradient-3)">.</span></a>
+            <button class="navbar-toggler filter-invert" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars text-white"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showHome(); document.getElementById('work').scrollIntoView(); return false;">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showHome(); document.getElementById('services').scrollIntoView(); return false;">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showHome(); document.getElementById('about').scrollIntoView(); return false;">About</a></li>
+                </ul>
+            </div>
+            <div class="d-none d-lg-block">
+                <a href="#contact" onclick="showHome();" class="btn btn-hire btn-sm">Let's Talk</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN VIEW CONTAINER -->
+    <main id="home-view">
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="hero-badge reveal active" style="opacity: 1; transform: translateY(0px);">
+                            <div class="status-dot"></div>
+                            Open for new commissions
+                        </div>
+                        <h1 class="display-1 reveal active" id="hero-title" style="transition-delay: 0.1s; opacity: 1; transform: translateY(0px);">Crafting digital <br>
+                            <span class="text-gradient">future proof</span> experiences.</h1>
+                        <p class="text-muted reveal active" id="hero-desc" style="font-size: 1.25rem; max-width: 580px; margin-bottom: 40px; transition-delay: 0.2s; opacity: 1; transform: translateY(0px);">I am a frontend specialist helping brands turn visitors into customers. Minimalist design, clean code, and maximum performance.</p>
+                        <div class="d-flex gap-3 reveal active" style="transition-delay: 0.3s; opacity: 1; transform: translateY(0px);">
+                            <a href="#work" class="btn btn-hire py-3 px-5 fs-6">View Projects</a>
+                            <a href="https://github.com" class="btn btn-outline-light py-3 px-4 rounded-pill fw-bold" style="border-color: rgba(255,255,255,0.3); color: white;">
+                                <i class="fab fa-github me-2"></i> GitHub
+                            </a>
+                        </div>
+                        <br><br><br>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Marquee -->
+        <div class="marquee-wrapper">
+            <div class="container text-center">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-4 justify-content-center">
+                    <i class="fab fa-react tech-icon" title="React"></i>
+                    <i class="fab fa-js tech-icon" title="JavaScript"></i>
+                    <i class="fab fa-html5 tech-icon" title="HTML5"></i>
+                    <i class="fab fa-css3-alt tech-icon" title="CSS3"></i>
+                    <i class="fab fa-bootstrap tech-icon" title="Bootstrap"></i>
+                    <i class="fab fa-sass tech-icon" title="Sass"></i>
+                    <i class="fab fa-git-alt tech-icon" title="Git"></i>
+                    <i class="fab fa-figma tech-icon" title="Figma"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <section id="work" class="py-5 mt-5">
+            <div class="container">
+                <div class="row mb-5 align-items-end reveal active" style="opacity: 1; transform: translateY(0px);">
+                    <div class="col-md-8">
+                        <h2 class="display-4 fw-bold mb-2">Featured Work</h2>
+                        <p class="text-muted">Selected projects from the last 12 months.</p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <button onclick="showArchive()" class="btn btn-link text-white text-decoration-none fw-bold pb-1 border-bottom border-white" style="border-radius: 0;">View Full Archive</button>
+                    </div>
+                </div>
+
+                <div class="row g-4" id="project-container">
+                    <!-- Projects are managed via ID for CMS -->
+                    <div class="col-md-6 reveal project-item active" style="opacity: 1; transform: translateY(0px);">
+                        <a href="https://fivenightsatbothra-commits.github.io/Portfolio/WebConstruct4.html" class="project-card proj-link" style="--mouse-x: 628.5999984741211px; --mouse-y: 336.1999969482422px;">
+                            <div class="card-img-box"><img src="https://raw.githubusercontent.com/fivenightsatbothra-commits/Portfolio-Website/refs/heads/main/SpeechTherapy.png" alt="Project 1"></div>
+                            <div class="card-content">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <span class="badge bg-transparent border border-light text-white mb-2 rounded-pill px-3 proj-cat">Custom</span>
+                                        <h3 class="h4 fw-bold proj-title">Business Site</h3>
+                                    </div>
+                                    <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
+                                </div>
+                                <p class="text-muted small mb-0 proj-desc">An Ultra Low Latency and highly responsive Website For a Speech Therapist</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6 reveal project-item active" style="transition-delay: 0.1s; opacity: 1; transform: translateY(0px);">
+                         <a href="https://fivenightsatbothra-commits.github.io/Portfolio/AstheticWedding.html" class="project-card proj-link" style="--mouse-x: 343.5999755859375px; --mouse-y: 365.7347869873047px;">
+                            <div class="card-img-box"><img src="https://raw.githubusercontent.com/fivenightsatbothra-commits/Portfolio-Website/refs/heads/main/AstheticWedding.png" alt="Project 2"></div>
+                            <div class="card-content">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <span class="badge bg-transparent border border-light text-white mb-2 rounded-pill px-3 proj-cat">Wedding</span>
+                                        <h3 class="h4 fw-bold proj-title">Asthetic Wedding</h3>
+                                    </div>
+                                    <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
+                                </div>
+                                <p class="text-muted small mb-0 proj-desc">A wedding website with a  Photogenic Personality</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-6 reveal project-item active" style="opacity: 1; transform: translateY(0px);">
+                         <a href="https://fivenightsatbothra-commits.github.io/Portfolio/book5.html" class="project-card proj-link" style="--mouse-x: 537.5999984741211px; --mouse-y: 424.5601501464844px;">
+                            <div class="card-img-box"><img src="https://raw.githubusercontent.com/fivenightsatbothra-commits/Portfolio-Website/refs/heads/main/BookPublishing.png" alt="Project 3"></div>
+                            <div class="card-content">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div>
+                                        <span class="badge bg-transparent border border-light text-white mb-2 rounded-pill px-3 proj-cat">Publishing</span>
+                                        <h3 class="h4 fw-bold proj-title">Publish a Book</h3>
+                                    </div>
+                                    <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
+                                </div>
+                                <p class="text-muted small mb-0 proj-desc">A single page amazing website built for a freelance writer's upcoming Book.</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-5 mt-5">
+            <div class="container reveal active" style="opacity: 1; transform: translateY(0px);">
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number" id="stat-exp">3+</div>
+                        <div class="text-muted small text-uppercase fw-bold ls-1">Years Experience</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="stat-proj">25+</div>
+                        <div class="text-muted small text-uppercase fw-bold ls-1">Projects Delivered</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="stat-job">100%</div>
+                        <div class="text-muted small text-uppercase fw-bold ls-1">Job Success</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="stat-clients">25+</div>
+                        <div class="text-muted small text-uppercase fw-bold ls-1">Happy Clients</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="footer text-center">
+            <div class="container">
+                <div class="reveal active" style="opacity: 1; transform: translateY(0px);">
+                    <h2 class="display-3 fw-bold mb-4">Let's work together.</h2>
+                    <p class="text-muted mb-5 mx-auto" style="max-width: 500px; font-size: 1.1rem;">
+                        Have a project in mind? I'm currently available for new opportunities.
+                    </p>
+                    <a href="mailto:fivenightsatbothra@gmail.com" id="contact-email-btn" class="btn btn-hire py-3 px-5 mb-5 fs-5">Get in Touch</a>
+                    
+                    <div class="d-flex justify-content-center gap-3 mb-5" id="footer-socials">
+                        <a href="mailto:fivenightsatbothra@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+                        
+                        <a href="https://github.com/fivenightsatbothra-commits" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="https://www.reddit.com/user/shadow4148b/" class="social-link"><i class="fab fa-reddit"></i></a>
+                        <a href="https://www.instagram.com/shadow4148b/" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="small text-muted opacity-50">© 2024 Shrey. Built with precision.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- ARCHIVE VIEW CONTAINER -->
+    <section id="archive-view" class="d-none">
+        <button onclick="showHome()" class="back-btn"><i class="fas fa-arrow-left me-2"></i> Back to Home</button>
+        <div class="container archive-header">
+            <h1 class="display-3 fw-bold mb-3">Project Archive</h1>
+            <p class="text-muted" style="max-width: 600px; margin: 0 auto;">A complete collection of commercial work, experiments, and open source contributions.</p>
+        </div>
+        <div class="container pb-5">
+            <div class="row g-4" id="archive-container">
+                <!-- Archive Items -->
+                <div class="col-md-4 archive-item">
+                    <a href="#" class="project-card proj-link">
+                        <div class="card-img-box" style="height: 200px;"><img src="https://via.placeholder.com/800x600/0f1016/333333?text=Archive+1" alt="Project"></div>
+                        <div class="card-content">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                     <h5 class="fw-bold text-white mb-1 proj-title">Bank UI Redesign</h5>
+                                     <p class="text-muted small mb-0 proj-cat">UX Case Study</p>
+                                </div>
+                                <div class="btn-arrow" style="width: 30px; height: 30px;"><i class="fas fa-arrow-right fa-sm"></i></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISUAL CMS OVERLAY -->
+    <div id="cms-overlay" class="">
+        <div class="cms-header">
+            <h4 class="fw-bold mb-0">Visual CMS</h4>
+            <button class="btn btn-sm btn-outline-light" onclick="closeCMS()"><i class="fas fa-times"></i></button>
+        </div>
+
+        <!-- Contact & Socials -->
+        <div class="cms-section">
+            <h5>Contact &amp; Socials</h5>
+            <div class="cms-input-group">
+                <label>Contact Email</label>
+                <input type="text" class="cms-input" id="cms-contact-email">
+            </div>
+            <label class="d-block text-secondary small mb-2">Social Icons</label>
+            <div id="cms-social-list"><div class="project-list-item">
+                    <div class="text-white"><i class="fas fa-envelope"></i></div>
+                    <div>
+                        <button class="btn-cms-action btn-edit" onclick="editSocial(0)">Edit</button>
+                        <button class="btn-cms-action btn-delete" onclick="deleteSocial(0)">Del</button>
+                    </div>
+                </div><div class="project-list-item">
+                    <div class="text-white"><i class="fab fa-github"></i></div>
+                    <div>
+                        <button class="btn-cms-action btn-edit" onclick="editSocial(1)">Edit</button>
+                        <button class="btn-cms-action btn-delete" onclick="deleteSocial(1)">Del</button>
+                    </div>
+                </div><div class="project-list-item">
+                    <div class="text-white"><i class="fab fa-reddit"></i></div>
+                    <div>
+                        <button class="btn-cms-action btn-edit" onclick="editSocial(2)">Edit</button>
+                        <button class="btn-cms-action btn-delete" onclick="deleteSocial(2)">Del</button>
+                    </div>
+                </div><div class="project-list-item">
+                    <div class="text-white"><i class="fab fa-instagram"></i></div>
+                    <div>
+                        <button class="btn-cms-action btn-edit" onclick="editSocial(3)">Edit</button>
+                        <button class="btn-cms-action btn-delete" onclick="deleteSocial(3)">Del</button>
+                    </div>
+                </div></div>
+            
+            <!-- Add New Social Button -->
+            <button class="btn btn-sm btn-outline-primary w-100 mt-2" onclick="addNewSocial()">+ Add Social Link</button>
+            
+            <!-- Social Editor Form (Hidden) -->
+            <div id="social-editor-form" class="mt-3 d-none">
+                <h6 class="text-white mb-2">Edit Social Link</h6>
+                <div class="cms-input-group">
+                    <label>Icon Class (e.g., fab fa-twitter)</label>
+                    <input type="text" class="cms-input" id="edit-social-icon">
+                </div>
+                <div class="cms-input-group">
+                    <label>Link URL</label>
+                    <input type="text" class="cms-input" id="edit-social-link">
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-sm btn-primary w-100" onclick="saveSocialEdit()">Save</button>
+                    <button class="btn btn-sm btn-outline-light w-100" onclick="cancelSocialEdit()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- General Stats -->
+        <div class="cms-section">
+            <h5>Statistics</h5>
+            <div class="cms-input-group">
+                <label>Years Experience</label>
+                <input type="text" class="cms-input" id="cms-stat-exp">
+            </div>
+            <div class="cms-input-group">
+                <label>Projects Delivered</label>
+                <input type="text" class="cms-input" id="cms-stat-proj">
+            </div>
+            <div class="cms-input-group">
+                <label>Job Success</label>
+                <input type="text" class="cms-input" id="cms-stat-job">
+            </div>
+            <div class="cms-input-group">
+                <label>Happy Clients</label>
+                <input type="text" class="cms-input" id="cms-stat-clients">
+            </div>
+        </div>
+
+        <!-- Hero Text -->
+        <div class="cms-section">
+            <h5>Hero Section</h5>
+            <div class="cms-input-group">
+                <label>Title HTML (Use &lt;br&gt; for breaks)</label>
+                <textarea class="cms-input" id="cms-hero-title" rows="3"></textarea>
+            </div>
+            <div class="cms-input-group">
+                <label>Description</label>
+                <textarea class="cms-input" id="cms-hero-desc" rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- Project Editor Form (Shared) -->
+        <div id="project-editor-form" class="sticky-top d-none" style="z-index: 20; top: 10px;">
+            <h6 class="text-white mb-2" id="editor-title">Edit Featured Project</h6>
+            <div class="cms-input-group">
+                <label>Title</label>
+                <input type="text" class="cms-input" id="edit-proj-title">
+            </div>
+            <div class="cms-input-group">
+                <label>Category</label>
+                <input type="text" class="cms-input" id="edit-proj-cat">
+            </div>
+            <div class="cms-input-group">
+                <label>Redirect Link / URL</label>
+                <input type="text" class="cms-input" id="edit-proj-link" placeholder="https://...">
+            </div>
+            <div class="cms-input-group">
+                <label>Image URL</label>
+                <input type="text" class="cms-input" id="edit-proj-img">
+            </div>
+            <div class="cms-input-group" id="edit-desc-group">
+                <label>Description</label>
+                <input type="text" class="cms-input" id="edit-proj-desc">
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-primary w-100" onclick="saveProjectEdit()">Save</button>
+                <button class="btn btn-sm btn-outline-light w-100" onclick="cancelProjectEdit()">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Featured Projects Manager -->
+        <div class="cms-section">
+            <h5>Featured Projects</h5>
+            <div id="cms-project-list"><div class="project-list-item">
+                    <span class="text-white small text-truncate" style="max-width: 140px;">Business Site</span>
+                    <div>
+                        <button class="btn-cms-action btn-edit" onclick="editProject(0, 'featured')">Edit</button>
+                        <button class="btn-cms-action btn-delete" onclick="deleteProject(0, 'featured')">Del</button>
+                    </div>
+                </div><div class="project-list-item">
+                    <span class="text-white small text-truncate" style="max-width: 140px;">Asthetic Wedding</span>
+                    <div>
+                        <button class="btn-cms-action btn-edit" onclick="editProject(1, 'featured')">Edit</button>
+                        <button class="btn-cms-action btn-delete" onclick="deleteProject(1, 'featured')">Del</button>
+                    </div>
+                </div><div class="project-list-item">
+                    <span class="text-white small text-truncate" style="max-width: 140px;">Publish a Book</span>
+                    <div>
+                        <button class="btn-cms-action btn-edit" onclick="editProject(2, 'featured')">Edit</button>
+                        <button class="btn-cms-action btn-delete" onclick="deleteProject(2, 'featured')">Del</button>
+                    </div>
+                </div></div>
+            <button class="btn btn-sm btn-outline-primary w-100 mt-2" onclick="addNewProject()">+ Add Featured Project</button>
+        </div>
+
+        <!-- Archive Projects Manager -->
+        <div class="cms-section">
+            <h5>Archive Projects</h5>
+            <div id="cms-archive-list"><div class="project-list-item">
+                    <span class="text-white small text-truncate" style="max-width: 140px;">Bank UI Redesign</span>
+                    <div>
+                        <button class="btn-cms-action btn-edit" onclick="editProject(0, 'archive')">Edit</button>
+                        <button class="btn-cms-action btn-delete" onclick="deleteProject(0, 'archive')">Del</button>
+                    </div>
+                </div></div>
+            <button class="btn btn-sm btn-outline-primary w-100 mt-2" onclick="addNewArchive()">+ Add Archive Project</button>
+        </div>
+
+        <div class="cms-actions">
+            <button class="btn btn-secondary" onclick="applyChanges()">Apply</button>
+            <button class="btn btn-hire w-100" onclick="downloadSite()">Save &amp; Download</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Main Logic -->
+    <script>
+        // --- 1. CHEAT CODE LOGIC ---
+        let keyBuffer = [];
+        const secretCode = 'admin';
+        let lastKeyTime = 0;
+
+        document.addEventListener('keydown', (e) => {
+            const currentTime = new Date().getTime();
+            if (currentTime - lastKeyTime > 1000) keyBuffer = [];
+            lastKeyTime = currentTime;
+
+            keyBuffer.push(e.key);
+            if (keyBuffer.length > secretCode.length) keyBuffer.shift();
+            
+            if (keyBuffer.join('').toLowerCase() === secretCode) {
+                openCMS();
+                keyBuffer = [];
+            }
+        });
+
+        // --- 2. CMS FUNCTIONS ---
+        function openCMS() {
+            const overlay = document.getElementById('cms-overlay');
+            overlay.classList.add('active');
+            
+            // Populate inputs
+            document.getElementById('cms-stat-exp').value = document.getElementById('stat-exp').innerText;
+            document.getElementById('cms-stat-proj').value = document.getElementById('stat-proj').innerText;
+            document.getElementById('cms-stat-job').value = document.getElementById('stat-job').innerText;
+            document.getElementById('cms-stat-clients').value = document.getElementById('stat-clients').innerText;
+            
+            document.getElementById('cms-hero-title').value = document.getElementById('hero-title').innerHTML.trim();
+            document.getElementById('cms-hero-desc').value = document.getElementById('hero-desc').innerText.trim();
+            
+            // Populate Contact
+            const emailBtn = document.getElementById('contact-email-btn');
+            const email = emailBtn.getAttribute('href').replace('mailto:', '');
+            document.getElementById('cms-contact-email').value = email;
+
+            renderCMSSocials();
+            renderCMSProjects();
+            renderCMSArchive();
+        }
+
+        function closeCMS() {
+            document.getElementById('cms-overlay').classList.remove('active');
+            cancelProjectEdit();
+            cancelSocialEdit();
+        }
+
+        // --- 3. SOCIALS MANAGER LOGIC ---
+        let currentSocialEditIndex = -1;
+
+        function renderCMSSocials() {
+            const list = document.getElementById('cms-social-list');
+            list.innerHTML = '';
+            const socials = document.querySelectorAll('#footer-socials .social-link');
+
+            socials.forEach((link, index) => {
+                const iconClass = link.querySelector('i').className;
+                const div = document.createElement('div');
+                div.className = 'project-list-item';
+                div.innerHTML = `
+                    <div class="text-white"><i class="${iconClass}"></i></div>
+                    <div>
+                        <button class="btn-cms-action btn-edit" onclick="editSocial(${index})">Edit</button>
+                        <button class="btn-cms-action btn-delete" onclick="deleteSocial(${index})">Del</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function editSocial(index) {
+            currentSocialEditIndex = index;
+            const socials = document.querySelectorAll('#footer-socials .social-link');
+            const link = socials[index];
+            const icon = link.querySelector('i');
+
+            document.getElementById('edit-social-icon').value = icon.className;
+            document.getElementById('edit-social-link').value = link.getAttribute('href');
+
+            document.getElementById('social-editor-form').classList.remove('d-none');
+        }
+
+        function saveSocialEdit() {
+            if (currentSocialEditIndex === -1) return;
+            const socials = document.querySelectorAll('#footer-socials .social-link');
+            const link = socials[currentSocialEditIndex];
+            
+            link.setAttribute('href', document.getElementById('edit-social-link').value);
+            link.querySelector('i').className = document.getElementById('edit-social-icon').value;
+
+            cancelSocialEdit();
+            renderCMSSocials();
+        }
+
+        function cancelSocialEdit() {
+            currentSocialEditIndex = -1;
+            document.getElementById('social-editor-form').classList.add('d-none');
+        }
+
+        function deleteSocial(index) {
+            if(confirm('Delete this social link?')) {
+                const socials = document.querySelectorAll('#footer-socials .social-link');
+                if(socials[index]) socials[index].remove();
+                renderCMSSocials();
+            }
+        }
+
+        function addNewSocial() {
+            const container = document.getElementById('footer-socials');
+            const newLink = document.createElement('a');
+            newLink.href = "#";
+            newLink.className = "social-link";
+            newLink.innerHTML = '<i class="fas fa-link"></i>';
+            container.appendChild(newLink);
+            
+            renderCMSSocials();
+            editSocial(document.querySelectorAll('#footer-socials .social-link').length - 1);
+        }
+
+
+        // --- 4. PROJECT MANAGER LOGIC ---
+        let currentEditIndex = -1;
+        let currentEditType = 'featured'; // 'featured' or 'archive'
+
+        function renderCMSProjects() {
+            const list = document.getElementById('cms-project-list');
+            list.innerHTML = '';
+            const projects = document.querySelectorAll('#project-container .project-item');
+            
+            projects.forEach((proj, index) => {
+                const title = proj.querySelector('.proj-title').innerText;
+                const div = document.createElement('div');
+                div.className = 'project-list-item';
+                div.innerHTML = `
+                    <span class="text-white small text-truncate" style="max-width: 140px;">${title}</span>
+                    <div>
+                        <button class="btn-cms-action btn-edit" onclick="editProject(${index}, 'featured')">Edit</button>
+                        <button class="btn-cms-action btn-delete" onclick="deleteProject(${index}, 'featured')">Del</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function renderCMSArchive() {
+            const list = document.getElementById('cms-archive-list');
+            list.innerHTML = '';
+            const archives = document.querySelectorAll('#archive-container .archive-item');
+            
+            archives.forEach((proj, index) => {
+                const title = proj.querySelector('.proj-title').innerText;
+                const div = document.createElement('div');
+                div.className = 'project-list-item';
+                div.innerHTML = `
+                    <span class="text-white small text-truncate" style="max-width: 140px;">${title}</span>
+                    <div>
+                        <button class="btn-cms-action btn-edit" onclick="editProject(${index}, 'archive')">Edit</button>
+                        <button class="btn-cms-action btn-delete" onclick="deleteProject(${index}, 'archive')">Del</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function deleteProject(index, type) {
+            if(confirm('Delete this project?')) {
+                const selector = type === 'featured' ? '#project-container .project-item' : '#archive-container .archive-item';
+                const projects = document.querySelectorAll(selector);
+                if(projects[index]) projects[index].remove();
+                
+                if(type === 'featured') renderCMSProjects();
+                else renderCMSArchive();
+            }
+        }
+
+        function editProject(index, type) {
+            currentEditIndex = index;
+            currentEditType = type;
+            const selector = type === 'featured' ? '#project-container .project-item' : '#archive-container .archive-item';
+            const projects = document.querySelectorAll(selector);
+            const proj = projects[index];
+
+            // Setup Form Title
+            document.getElementById('editor-title').innerText = type === 'featured' ? 'Edit Featured Project' : 'Edit Archive Project';
+
+            // Fill Form
+            document.getElementById('edit-proj-title').value = proj.querySelector('.proj-title').innerText;
+            document.getElementById('edit-proj-cat').value = proj.querySelector('.proj-cat').innerText;
+            document.getElementById('edit-proj-img').value = proj.querySelector('img').src;
+            
+            // Handle Link
+            const linkEl = proj.querySelector('.proj-link');
+            document.getElementById('edit-proj-link').value = linkEl ? linkEl.getAttribute('href') : '#';
+
+            // Handle Description (Archive might not have one displayed in grid, but we can edit it if we add structure later. For now, hide desc for archive)
+            const descEl = proj.querySelector('.proj-desc');
+            if(descEl) {
+                document.getElementById('edit-proj-desc').value = descEl.innerText;
+                document.getElementById('edit-desc-group').classList.remove('d-none');
+            } else {
+                document.getElementById('edit-desc-group').classList.add('d-none');
+            }
+
+            // Show Form
+            document.getElementById('project-editor-form').classList.remove('d-none');
+        }
+
+        function processImageLink(url) {
+            // Helper to fix common Google Drive view link issues
+            if (url.includes('drive.google.com') && url.includes('/view')) {
+                // Extract the ID
+                const idMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+                if (idMatch && idMatch[1]) {
+                    // Convert to a direct view link that allows hotlinking (usually)
+                    // Using uc?export=view is the standard "Download/View" proxy
+                    return `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
+                }
+            }
+            return url;
+        }
+
+        function saveProjectEdit() {
+            if (currentEditIndex === -1) return;
+
+            const selector = currentEditType === 'featured' ? '#project-container .project-item' : '#archive-container .archive-item';
+            const projects = document.querySelectorAll(selector);
+            const proj = projects[currentEditIndex];
+
+            // Update DOM
+            proj.querySelector('.proj-title').innerText = document.getElementById('edit-proj-title').value;
+            proj.querySelector('.proj-cat').innerText = document.getElementById('edit-proj-cat').value;
+            
+            // Handle Image - Process the URL first
+            const rawImg = document.getElementById('edit-proj-img').value;
+            proj.querySelector('img').src = processImageLink(rawImg);
+            
+            // Update Link
+            const linkEl = proj.querySelector('.proj-link');
+            if(linkEl) linkEl.setAttribute('href', document.getElementById('edit-proj-link').value);
+
+            // Update Desc
+            if(currentEditType === 'featured') {
+                proj.querySelector('.proj-desc').innerText = document.getElementById('edit-proj-desc').value;
+            }
+
+            // Cleanup
+            cancelProjectEdit();
+            if(currentEditType === 'featured') renderCMSProjects();
+            else renderCMSArchive();
+        }
+
+        function cancelProjectEdit() {
+            currentEditIndex = -1;
+            document.getElementById('project-editor-form').classList.add('d-none');
+        }
+
+        function addNewProject() {
+            const container = document.getElementById('project-container');
+            const newDiv = document.createElement('div');
+            newDiv.className = 'col-md-6 reveal project-item active'; 
+            newDiv.style.opacity = 1; newDiv.style.transform = 'translateY(0)';
+            
+            newDiv.innerHTML = `
+                <a href="#" class="project-card proj-link">
+                    <div class="card-img-box"><img src="https://via.placeholder.com/800x600/0f1016/333333?text=New+Project" alt="New Project"></div>
+                    <div class="card-content">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <span class="badge bg-transparent border border-light text-white mb-2 rounded-pill px-3 proj-cat">Category</span>
+                                <h3 class="h4 fw-bold proj-title">New Project</h3>
+                            </div>
+                            <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
+                        </div>
+                        <p class="text-muted small mb-0 proj-desc">Project description goes here.</p>
+                    </div>
+                </a>
+            `;
+            container.prepend(newDiv); // Add to top
+            renderCMSProjects();
+            editProject(0, 'featured');
+        }
+
+        function addNewArchive() {
+            const container = document.getElementById('archive-container');
+            const newDiv = document.createElement('div');
+            newDiv.className = 'col-md-4 archive-item'; 
+            
+            newDiv.innerHTML = `
+                <a href="#" class="project-card proj-link">
+                    <div class="card-img-box" style="height: 200px;"><img src="https://via.placeholder.com/800x600/0f1016/333333?text=New+Archive" alt="Project"></div>
+                    <div class="card-content">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                 <h5 class="fw-bold text-white mb-1 proj-title">New Archive</h5>
+                                 <p class="text-muted small mb-0 proj-cat">Category</p>
+                            </div>
+                            <div class="btn-arrow" style="width: 30px; height: 30px;"><i class="fas fa-arrow-right fa-sm"></i></div>
+                        </div>
+                    </div>
+                </a>
+            `;
+            container.prepend(newDiv);
+            renderCMSArchive();
+            editProject(0, 'archive');
+        }
+
+        // --- 5. APPLY & DOWNLOAD ---
+        function applyChanges() {
+            // Stats
+            document.getElementById('stat-exp').innerText = document.getElementById('cms-stat-exp').value;
+            document.getElementById('stat-proj').innerText = document.getElementById('cms-stat-proj').value;
+            document.getElementById('stat-job').innerText = document.getElementById('cms-stat-job').value;
+            document.getElementById('stat-clients').innerText = document.getElementById('cms-stat-clients').value;
+            
+            // Hero
+            document.getElementById('hero-title').innerHTML = document.getElementById('cms-hero-title').value;
+            document.getElementById('hero-desc').innerText = document.getElementById('cms-hero-desc').value;
+            
+            // Contact
+            const email = document.getElementById('cms-contact-email').value;
+            document.getElementById('contact-email-btn').setAttribute('href', 'mailto:' + email);
+
+            alert('Changes applied to current view!');
+        }
+
+        function downloadSite() {
+            applyChanges();
+            cancelProjectEdit();
+            cancelSocialEdit();
+            
+            const overlay = document.getElementById('cms-overlay');
+            overlay.classList.remove('active'); 
+            
+            // Deep clone doc to modify for export without affecting current view
+            const docClone = document.documentElement.cloneNode(true);
+            docClone.querySelector('#cms-overlay').classList.remove('active');
+            
+            // Ensure classes on clone match current state (e.g. reveal active)
+            // Note: cloneNode(true) copies attributes like class, style. 
+            // So elements that are currently visible/active will be saved as such.
+            
+            const htmlContent = "<!DOCTYPE html>\n" + docClone.outerHTML;
+            const blob = new Blob([htmlContent], {type: "text/html"});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "index.html";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            setTimeout(() => overlay.classList.add('active'), 500);
+        }
+
+        // --- SPA Logic ---
+        function showArchive() {
+            document.getElementById('home-view').classList.add('d-none');
+            document.getElementById('archive-view').classList.remove('d-none');
+            window.scrollTo(0, 0);
+        }
+
+        function showHome() {
+            document.getElementById('archive-view').classList.add('d-none');
+            document.getElementById('home-view').classList.remove('d-none');
+            window.scrollTo(0, 0);
+        }
+
+        // Scroll Reveal Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(30px)';
+                observer.observe(el);
+            });
+
+            // Card Holographic Effect
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+        });
+    </script>
+
+<script>console.log('Hello JS');</script></body></html>
