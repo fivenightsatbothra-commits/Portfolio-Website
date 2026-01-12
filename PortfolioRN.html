@@ -1,5 +1,8 @@
+
 <!DOCTYPE html>
-<html lang="en"><head><style>body { font-family: monospace; background:#141414; color:#fff; }</style></head><body>
+<html lang="en"><head><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style><style>body { font-family: monospace; background:#141414; color:#fff; }</style></head><body><div id="youtube-dislike-extension-content-script" style="display: none;"></div>
 
 
     <meta charset="UTF-8">
@@ -355,10 +358,24 @@
                     </div>
                 </div>
 
-                <div class="row g-4" id="project-container">
+                <div class="row g-4" id="project-container"><div class="col-md-6 reveal project-item active" style="opacity: 1; transform: translateY(0px);">
+                <a href="https://fivenightsatbothra-commits.github.io/wiki-what" class="project-card proj-link" style="--mouse-x: 628.5999984741211px; --mouse-y: 377.4750671386719px;">
+                    <div class="card-img-box"><img src="https://raw.githubusercontent.com/fivenightsatbothra-commits/Portfolio-Website/refs/heads/main/ConWiki.png" alt="New Project"></div>
+                    <div class="card-content">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <span class="badge bg-transparent border border-light text-white mb-2 rounded-pill px-3 proj-cat">Wiki</span>
+                                <h3 class="h4 fw-bold proj-title">ConWiki</h3>
+                            </div>
+                            <div class="btn-arrow"><i class="fas fa-arrow-right"></i></div>
+                        </div>
+                        <p class="text-muted small mb-0 proj-desc">Wiki for con or madeup languages</p>
+                    </div>
+                </a>
+            </div>
                     <!-- Projects are managed via ID for CMS -->
                     <div class="col-md-6 reveal project-item active" style="opacity: 1; transform: translateY(0px);">
-                        <a href="https://fivenightsatbothra-commits.github.io/Portfolio/WebConstruct4.html" class="project-card proj-link" style="--mouse-x: 628.5999984741211px; --mouse-y: 336.1999969482422px;">
+                        <a href="https://fivenightsatbothra-commits.github.io/Portfolio/WebConstruct4.html" class="project-card proj-link" style="--mouse-x: 13.5999755859375px; --mouse-y: 411.9595947265625px;">
                             <div class="card-img-box"><img src="https://raw.githubusercontent.com/fivenightsatbothra-commits/Portfolio-Website/refs/heads/main/SpeechTherapy.png" alt="Project 1"></div>
                             <div class="card-content">
                                 <div class="d-flex justify-content-between align-items-start mb-3">
@@ -373,7 +390,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 reveal project-item active" style="transition-delay: 0.1s; opacity: 1; transform: translateY(0px);">
-                         <a href="https://fivenightsatbothra-commits.github.io/Portfolio/AstheticWedding.html" class="project-card proj-link" style="--mouse-x: 343.5999755859375px; --mouse-y: 365.7347869873047px;">
+                         <a href="https://fivenightsatbothra-commits.github.io/Portfolio/AstheticWedding.html" class="project-card proj-link" style="--mouse-x: 619.5999984741211px; --mouse-y: 63.79998779296875px;">
                             <div class="card-img-box"><img src="https://raw.githubusercontent.com/fivenightsatbothra-commits/Portfolio-Website/refs/heads/main/AstheticWedding.png" alt="Project 2"></div>
                             <div class="card-content">
                                 <div class="d-flex justify-content-between align-items-start mb-3">
@@ -388,7 +405,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 reveal project-item active" style="opacity: 1; transform: translateY(0px);">
-                         <a href="https://fivenightsatbothra-commits.github.io/Portfolio/book5.html" class="project-card proj-link" style="--mouse-x: 537.5999984741211px; --mouse-y: 424.5601501464844px;">
+                         <a href="https://fivenightsatbothra-commits.github.io/Portfolio/book5.html" class="project-card proj-link" style="--mouse-x: 291.5999755859375px; --mouse-y: 280.13037109375px;">
                             <div class="card-img-box"><img src="https://raw.githubusercontent.com/fivenightsatbothra-commits/Portfolio-Website/refs/heads/main/BookPublishing.png" alt="Project 3"></div>
                             <div class="card-content">
                                 <div class="d-flex justify-content-between align-items-start mb-3">
@@ -409,7 +426,7 @@
 
         <!-- Stats Section -->
         <section class="py-5 mt-5">
-            <div class="container reveal active" style="opacity: 1; transform: translateY(0px);">
+            <div class="container reveal active" style="opacity: 0; transform: translateY(30px);">
                 <div class="stats-grid">
                     <div class="stat-box">
                         <div class="stat-number" id="stat-exp">3+</div>
@@ -434,7 +451,7 @@
         <!-- Footer -->
         <footer id="contact" class="footer text-center">
             <div class="container">
-                <div class="reveal active" style="opacity: 1; transform: translateY(0px);">
+                <div class="reveal active" style="opacity: 0; transform: translateY(30px);">
                     <h2 class="display-3 fw-bold mb-4">Let's work together.</h2>
                     <p class="text-muted mb-5 mx-auto" style="max-width: 500px; font-size: 1.1rem;">
                         Have a project in mind? I'm currently available for new opportunities.
@@ -465,13 +482,13 @@
             <div class="row g-4" id="archive-container">
                 <!-- Archive Items -->
                 <div class="col-md-4 archive-item">
-                    <a href="#" class="project-card proj-link">
-                        <div class="card-img-box" style="height: 200px;"><img src="https://via.placeholder.com/800x600/0f1016/333333?text=Archive+1" alt="Project"></div>
+                    <a href="https://fivenightsatbothra-commits.github.io/monkeytype-clone/" class="project-card proj-link">
+                        <div class="card-img-box" style="height: 200px;"><img src="https://raw.githubusercontent.com/fivenightsatbothra-commits/monkeytype-clone/refs/heads/main/MonkeyType.png" alt="Project"></div>
                         <div class="card-content">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                     <h5 class="fw-bold text-white mb-1 proj-title">Bank UI Redesign</h5>
-                                     <p class="text-muted small mb-0 proj-cat">UX Case Study</p>
+                                     <h5 class="fw-bold text-white mb-1 proj-title">MonkeyType clone</h5>
+                                     <p class="text-muted small mb-0 proj-cat">UX case study</p>
                                 </div>
                                 <div class="btn-arrow" style="width: 30px; height: 30px;"><i class="fas fa-arrow-right fa-sm"></i></div>
                             </div>
@@ -580,7 +597,7 @@
 
         <!-- Project Editor Form (Shared) -->
         <div id="project-editor-form" class="sticky-top d-none" style="z-index: 20; top: 10px;">
-            <h6 class="text-white mb-2" id="editor-title">Edit Featured Project</h6>
+            <h6 class="text-white mb-2" id="editor-title">Edit Archive Project</h6>
             <div class="cms-input-group">
                 <label>Title</label>
                 <input type="text" class="cms-input" id="edit-proj-title">
@@ -597,7 +614,7 @@
                 <label>Image URL</label>
                 <input type="text" class="cms-input" id="edit-proj-img">
             </div>
-            <div class="cms-input-group" id="edit-desc-group">
+            <div class="cms-input-group d-none" id="edit-desc-group">
                 <label>Description</label>
                 <input type="text" class="cms-input" id="edit-proj-desc">
             </div>
@@ -611,22 +628,28 @@
         <div class="cms-section">
             <h5>Featured Projects</h5>
             <div id="cms-project-list"><div class="project-list-item">
-                    <span class="text-white small text-truncate" style="max-width: 140px;">Business Site</span>
+                    <span class="text-white small text-truncate" style="max-width: 140px;">ConWiki</span>
                     <div>
                         <button class="btn-cms-action btn-edit" onclick="editProject(0, 'featured')">Edit</button>
                         <button class="btn-cms-action btn-delete" onclick="deleteProject(0, 'featured')">Del</button>
                     </div>
                 </div><div class="project-list-item">
-                    <span class="text-white small text-truncate" style="max-width: 140px;">Asthetic Wedding</span>
+                    <span class="text-white small text-truncate" style="max-width: 140px;">Business Site</span>
                     <div>
                         <button class="btn-cms-action btn-edit" onclick="editProject(1, 'featured')">Edit</button>
                         <button class="btn-cms-action btn-delete" onclick="deleteProject(1, 'featured')">Del</button>
                     </div>
                 </div><div class="project-list-item">
-                    <span class="text-white small text-truncate" style="max-width: 140px;">Publish a Book</span>
+                    <span class="text-white small text-truncate" style="max-width: 140px;">Asthetic Wedding</span>
                     <div>
                         <button class="btn-cms-action btn-edit" onclick="editProject(2, 'featured')">Edit</button>
                         <button class="btn-cms-action btn-delete" onclick="deleteProject(2, 'featured')">Del</button>
+                    </div>
+                </div><div class="project-list-item">
+                    <span class="text-white small text-truncate" style="max-width: 140px;">Publish a Book</span>
+                    <div>
+                        <button class="btn-cms-action btn-edit" onclick="editProject(3, 'featured')">Edit</button>
+                        <button class="btn-cms-action btn-delete" onclick="deleteProject(3, 'featured')">Del</button>
                     </div>
                 </div></div>
             <button class="btn btn-sm btn-outline-primary w-100 mt-2" onclick="addNewProject()">+ Add Featured Project</button>
@@ -636,7 +659,7 @@
         <div class="cms-section">
             <h5>Archive Projects</h5>
             <div id="cms-archive-list"><div class="project-list-item">
-                    <span class="text-white small text-truncate" style="max-width: 140px;">Bank UI Redesign</span>
+                    <span class="text-white small text-truncate" style="max-width: 140px;">MonkeyType clone</span>
                     <div>
                         <button class="btn-cms-action btn-edit" onclick="editProject(0, 'archive')">Edit</button>
                         <button class="btn-cms-action btn-delete" onclick="deleteProject(0, 'archive')">Del</button>
